@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jknwr">
+    package="net.laddge.jknwr">
    <application
-        android:label="jknwr"
+        android:label="Jknwr"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

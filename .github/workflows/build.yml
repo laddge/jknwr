@@ -20,3 +20,11 @@ jobs:
       with:
         name: android
         path: build/app/outputs/flutter-apk/app-release.apk
+    - name: Upload to Google Drive
+      uses: satackey/action-google-drive@v1
+      with:
+        skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+        upload-from: build/app/outputs/flutter-apk/app-release.apk
+        upload-to: jknwr
+        google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+        google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}

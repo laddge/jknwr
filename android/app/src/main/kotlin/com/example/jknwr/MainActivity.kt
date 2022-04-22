@@ -1,4 +1,4 @@
-package com.example.jknwr
+package net.laddge.jknwr
 
 import io.flutter.embedding.android.FlutterActivity
 

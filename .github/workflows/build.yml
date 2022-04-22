@@ -12,6 +12,25 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '2.10.4'
+        cache: true
+    - name: Cache pubspec dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ env.FLUTTER_HOME }}/.pub-cache
+          **/.packages
+          **/.flutter-plugins
+          **/.flutter-plugin-dependencies
+          **/.dart_tool/package_config.json
+        key: build-pubspec-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          build-pubspec-
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
     - run: flutter pub get
       # - run: flutter test
     - name: Create release.jks

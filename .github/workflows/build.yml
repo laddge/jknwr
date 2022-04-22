@@ -14,7 +14,16 @@ jobs:
         flutter-version: '2.10.4'
     - run: flutter pub get
       # - run: flutter test
-    - run: flutter build apk
+    - name: Create release.jks
+      run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > android/release.jks
+    - name: Create key.properties
+      run: |
+        echo 'storeFile=release.jks' > android/key.properties
+        echo 'storePassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
+        echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
+        echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+    - name: Build Apk
+      run: flutter build apk
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
